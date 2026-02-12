@@ -184,7 +184,7 @@ const CommitmentSection: React.FC = () => {
                                 </h3>
                                 <p className="text-sm md:text-base font-sans font-light text-rose-300 leading-snug">
                                     adore you deeply with every sunrise,
-                                    cherish every moment we share,
+                                    cherish every moment we share, 
                                     and treasure the love we have.
                                 </p>
                                 <p className="text-xs md:text-sm font-serif text-rose-200/80 italic mt-3">
@@ -197,6 +197,7 @@ const CommitmentSection: React.FC = () => {
             </div>
         </section>
     );
-};
+};//fixed errors
+//in code erros
 
 export default CommitmentSection;

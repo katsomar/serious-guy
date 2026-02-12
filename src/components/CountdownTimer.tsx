@@ -14,7 +14,7 @@ const CountdownTimer: React.FC = () => {
     const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
-        const targetDate = new Date('2025-02-14T00:00:00').getTime();
+        const targetDate = new Date('2026-02-14T00:00:00').getTime();
 
         const calculateTimeLeft = () => {
             const now = new Date().getTime();
@@ -142,7 +142,7 @@ const CountdownTimer: React.FC = () => {
                     <div className="inline-block bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-8 py-4 shadow-xl">
                         <p className="text-lg md:text-xl text-rose-200 font-sans">
                             <Calendar className="inline mr-2" size={20} />
-                            Unlocks: <span className="font-bold text-white">February 14, 2025 • Midnight</span>
+                            Unlocks: <span className="font-bold text-white">February 14, 2026 • Midnight</span>
                         </p>
                     </div>
 

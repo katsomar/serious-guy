@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     const checkDate = () => {
       const now = new Date();
-      const valentinesDay = new Date('2025-02-14T00:00:00');
+      const valentinesDay = new Date('2026-02-14T00:00:00');
       setIsBeforeValentines(now < valentinesDay);
     };
 

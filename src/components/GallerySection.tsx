@@ -2,12 +2,36 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const memories = [
-    { id: 1, src: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500&auto=format&fit=crop&q=60", message: "You are my sunshine ☀️" },
-    { id: 2, src: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500&auto=format&fit=crop&q=60", message: "Life is sweeter with you 🍯" },
-    { id: 3, src: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=500&auto=format&fit=crop&q=60", message: "My heart chose you 💘" },
-    { id: 4, src: "https://images.unsplash.com/photo-1522673607200-1645062cd955?w=500&auto=format&fit=crop&q=60", message: "Walking through life together 🚶‍♂️🚶‍♀️" },
-    { id: 5, src: "https://images.unsplash.com/photo-1511285560982-1351c4f6305b?w=500&auto=format&fit=crop&q=60", message: "Every moment is magic ✨" },
-    { id: 6, src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=60", message: "Forever my favorite view 🏔️" },
+    { 
+        id: 1, 
+        src: "/images/1.jpeg", 
+        message: "Every morning I wake up grateful for you. You are the sunshine that brightens my darkest days, the warmth that fills my heart with joy. With you, every moment feels like a beautiful dream come true. ☀️💛" 
+    },
+    { 
+        id: 2, 
+        src: "/images/2.jpeg", 
+        message: "Life before you was just existing, but with you, I'm truly living. You make every ordinary moment extraordinary, every simple day an adventure. My heart is fuller because of you, and I cherish every second we share together. 🍯✨" 
+    },
+    { 
+        id: 3, 
+        src: "/images/3.jpeg", 
+        message: "From thousands of people in this world, my heart recognized you and chose you. You are my soulmate, my best friend, and my love. I fall deeper in love with you every single day. 💘🌹" 
+    },
+    { 
+        id: 4, 
+        src: "/images/4.jpeg", 
+        message: "Walking through life with you is the greatest blessing I could ever ask for. Hand in hand, heart to heart, we face every challenge together and celebrate every victory. You complete me in ways I never thought possible. 🚶‍♂️🚶‍♀️💕" 
+    },
+    { 
+        id: 5, 
+        src: "/images/5.jpeg", 
+        message: "You bring magic into my life that I never knew existed. Every laugh we share, every conversation we have, every moment spent together feels like pure enchantment. You are my fairy tale come true, my happily ever after. ✨🎆" 
+    },
+    { 
+        id: 6, 
+        src: "/images/6.jpeg", 
+        message: "Among all the beautiful places in this world, my favorite view will always be you. Your smile lights up my universe, your presence brings me peace, and your love gives me purpose. You are my home, my haven, destination. 🏔️❤️" 
+    },
 ];
 
 const GallerySection: React.FC = () => {
@@ -42,12 +66,12 @@ const GallerySection: React.FC = () => {
 
                             {/* Back Side (Text) */}
                             <div
-                                className="absolute inset-0 backface-hidden rounded-2xl flex items-center justify-center p-6 text-center shadow-xl bg-white border-2 border-rose-100"
+                                className="absolute inset-0 backface-hidden rounded-2xl flex items-center justify-center p-8 text-center shadow-xl bg-gradient-to-br from-rose-50 to-pink-100 border-2 border-rose-200"
                                 style={{ transform: "rotateY(180deg)" }}
                             >
-                                <div className="flex flex-col items-center gap-4">
+                                <div className="flex flex-col items-center gap-4 max-h-full overflow-y-auto">
                                     <span className="text-4xl">💌</span>
-                                    <p className="text-2xl font-display text-rose-500">
+                                    <p className="text-base md:text-lg font-sans text-rose-600 leading-relaxed">
                                         {memory.message}
                                     </p>
                                 </div>

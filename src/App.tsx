@@ -13,11 +13,13 @@ import AppreciationSection from './components/AppreciationSection';
 import CTASection from './components/CTASection';
 import AudioPlayer, { type AudioPlayerRef } from './components/AudioPlayer';
 import MobileBlocker from './components/MobileBlocker';
+import CountdownTimer from './components/CountdownTimer';
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [showProposal, setShowProposal] = useState(false);
   const [accepted, setAccepted] = useState(false);
+  const [isBeforeValentines, setIsBeforeValentines] = useState(true);
   const audioPlayerRef = useRef<AudioPlayerRef>(null);
 
   // Lock scroll initially
@@ -44,6 +46,25 @@ function App() {
       audioPlayerRef.current.playAudio();
     }
   };
+
+  // Check if it's before Valentine's Day midnight
+  useEffect(() => {
+    const checkDate = () => {
+      const now = new Date();
+      const valentinesDay = new Date('2025-02-14T00:00:00');
+      setIsBeforeValentines(now < valentinesDay);
+    };
+
+    checkDate();
+    const interval = setInterval(checkDate, 1000); // Check every second
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Show countdown if before Valentine's Day
+  if (isBeforeValentines) {
+    return <CountdownTimer />;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-900 via-plum-900 to-rose-900 text-white relative font-sans selection:bg-rose-500 selection:text-white">

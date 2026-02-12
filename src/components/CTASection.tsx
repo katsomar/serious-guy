@@ -6,7 +6,7 @@ const CTASection: React.FC = () => {
     return (
         <div className="bg-rose-900 pb-20 pt-10 text-center">
             <motion.a
-                href="https://wa.me/YOUR_PHONE_NUMBER" // User to replace
+                href="https://wa.me/256771827046"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255, 77, 109, 0.6)" }}

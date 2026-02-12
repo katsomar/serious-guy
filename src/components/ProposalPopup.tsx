@@ -25,16 +25,16 @@ const ProposalPopup: React.FC<ProposalPopupProps> = ({ isOpen, onAccept }) => {
     const handleYesClick = () => {
         // Elegant confetti rain from sides covering entire scrollable page
         const duration = 8000; // 8 seconds
-        const animationEnd = Date.now() + duration;
+        const startTime = Date.now();
         const defaults = { 
-            startVelocity: 25, // Medium speed
+            startVelocity: 25,
             spread: 50, 
-            ticks: 600, // Much longer fall time to reach bottom of page
+            ticks: 600,
             zIndex: 9999,
             colors: ['#ff4d6d', '#ffd166', '#c9184a', '#ff6b9d', '#fff0f3', '#ffb3c1'],
-            gravity: 0.3, // Very slow fall to travel entire page
-            drift: 0.5, // Slight horizontal drift
-            scalar: 1.5, // Moderate particle size
+            gravity: 0.3,
+            drift: 0.5,
+            scalar: 1.5,
             disableForReducedMotion: false
         };
 
@@ -42,58 +42,9 @@ const ProposalPopup: React.FC<ProposalPopupProps> = ({ isOpen, onAccept }) => {
             return Math.random() * (max - min) + min;
         }
 
-        // Continuous gentle rain from top sides
-        const interval = setInterval(function() {
-            const timeLeft = animationEnd - Date.now();
-
-            if (timeLeft <= 0) {
-                return clearInterval(interval);
-            }
-
-            const particleCount = 25; // Steady stream
-
-            // Rain from left side (top of viewport)
-            confetti({
-                ...defaults,
-                particleCount,
-                origin: { 
-                    x: randomInRange(0, 0.2), // Far left side
-                    y: 0 // Top of viewport
-                },
-                angle: 80, // Slight angle inward
-                spread: 35
-            });
-
-            // Rain from right side (top of viewport)
-            confetti({
-                ...defaults,
-                particleCount,
-                origin: { 
-                    x: randomInRange(0.8, 1), // Far right side
-                    y: 0 // Top of viewport
-                },
-                angle: 100, // Slight angle inward
-                spread: 35
-            });
-
-            // Center rain
-            confetti({
-                ...defaults,
-                particleCount: 15,
-                origin: { 
-                    x: randomInRange(0.4, 0.6), // Center
-                    y: 0 
-                },
-                angle: 90, // Straight down
-                spread: 25
-            });
-
-        }, 120); // Frequent for continuous effect
-
         // Initial celebration burst from sides
         for (let i = 0; i < 4; i++) {
             setTimeout(() => {
-                // Left side burst
                 confetti({
                     ...defaults,
                     particleCount: 60,
@@ -104,7 +55,6 @@ const ProposalPopup: React.FC<ProposalPopupProps> = ({ isOpen, onAccept }) => {
                     scalar: 1.8
                 });
                 
-                // Right side burst
                 confetti({
                     ...defaults,
                     particleCount: 60,
@@ -115,7 +65,6 @@ const ProposalPopup: React.FC<ProposalPopupProps> = ({ isOpen, onAccept }) => {
                     scalar: 1.8
                 });
 
-                // Center burst
                 confetti({
                     ...defaults,
                     particleCount: 40,
@@ -128,27 +77,86 @@ const ProposalPopup: React.FC<ProposalPopupProps> = ({ isOpen, onAccept }) => {
             }, i * 300);
         }
 
-        // Gentle cascading curtain effect
-        const cascadeInterval = setInterval(() => {
-            const timeLeft = animationEnd - Date.now();
-            if (timeLeft <= 0) {
-                return clearInterval(cascadeInterval);
+        // Continuous gentle rain - using requestAnimationFrame for better performance
+        let animationFrameId: number;
+        let lastRainTime = Date.now();
+        let lastCascadeTime = Date.now();
+
+        const animate = () => {
+            const elapsed = Date.now() - startTime;
+            
+            if (elapsed >= duration) {
+                // Stop animation
+                return;
             }
 
-            // Create curtain effect from top across entire width
-            for (let x = 0; x <= 1; x += 0.15) {
-                setTimeout(() => {
-                    confetti({
-                        ...defaults,
-                        particleCount: 12,
-                        origin: { x, y: 0 },
-                        angle: 90,
-                        spread: 20,
-                        startVelocity: 20
-                    });
-                }, x * 80);
+            const now = Date.now();
+
+            // Rain every 120ms
+            if (now - lastRainTime >= 120) {
+                lastRainTime = now;
+                
+                confetti({
+                    ...defaults,
+                    particleCount: 25,
+                    origin: { 
+                        x: randomInRange(0, 0.2),
+                        y: 0
+                    },
+                    angle: 80,
+                    spread: 35
+                });
+
+                confetti({
+                    ...defaults,
+                    particleCount: 25,
+                    origin: { 
+                        x: randomInRange(0.8, 1),
+                        y: 0
+                    },
+                    angle: 100,
+                    spread: 35
+                });
+
+                confetti({
+                    ...defaults,
+                    particleCount: 15,
+                    origin: { 
+                        x: randomInRange(0.4, 0.6),
+                        y: 0 
+                    },
+                    angle: 90,
+                    spread: 25
+                });
             }
-        }, 600);
+
+            // Cascade every 600ms
+            if (now - lastCascadeTime >= 600) {
+                lastCascadeTime = now;
+                
+                for (let x = 0; x <= 1; x += 0.15) {
+                    setTimeout(() => {
+                        confetti({
+                            ...defaults,
+                            particleCount: 12,
+                            origin: { x, y: 0 },
+                            angle: 90,
+                            spread: 20,
+                            startVelocity: 20
+                        });
+                    }, x * 80);
+                }
+            }
+
+            animationFrameId = requestAnimationFrame(animate);
+        };
+
+        animationFrameId = requestAnimationFrame(animate);
+
+        // Cleanup after duration
+        setTimeout(() => {
+            cancelAnimationFrame(animationFrameId);
+        }, duration);
 
         onAccept();
     };

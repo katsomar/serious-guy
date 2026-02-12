@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const FloatingHearts = () => {
     const [hearts, setHearts] = useState<{ id: number; x: number; scale: number; duration: number }[]>([]);

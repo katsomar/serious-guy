@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Allow audio files in public/audio
+!public/audio/*.mp3
+!public/audio/*.wav
+!public/audio/*.ogg

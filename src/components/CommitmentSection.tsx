@@ -139,6 +139,9 @@ const CommitmentSection: React.FC = () => {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.5 }}
                             className="w-full h-full object-cover"
+                            onError={() => {
+                                console.error(`Failed to load: ${images[currentImage]}`);
+                            }}
                         />
                     </AnimatePresence>
                 </motion.div>
@@ -164,6 +167,9 @@ const CommitmentSection: React.FC = () => {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.5 }}
                             className="w-full h-full object-cover"
+                            onError={() => {
+                                console.error(`Failed to load: ${images[(currentImage + 1) % images.length]}`);
+                            }}
                         />
                     </AnimatePresence>
                 </motion.div>
